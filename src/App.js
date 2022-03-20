@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from "react";
+import {
+  BrowserRouter,
+  Link,
+  Switch,
+  Route
+} from "react-router-dom";
+import { useParams } from "react-router";
+    
+const Location = (props) => {
+  const { city } = useParams();
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <h1>Welcome to { city }!</h1>
   );
 }
 
+    
+function App() {
+  return (
+    <BrowserRouter>
+      <p>
+        <Link to="/location/seattle">Seattle</Link>
+        &nbsp;|&nbsp;
+        <Link to="/location/chicago">Chicago</Link>
+        &nbsp;|&nbsp;
+        <Link to="/location/burbank">Burbank</Link>
+      </p>
+      <Switch>
+        <Route path="/location/:city">
+          <Location />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+}
+    
 export default App;
